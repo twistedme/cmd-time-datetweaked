@@ -35,7 +35,7 @@ static void set_time(struct tm *t)
   text_layer_set_text(time_layer, time_buffer);
 
   //Set date
-  strftime(date_buffer, sizeof("XX/XX/XXXX"), "%d/%m/%Y", t);
+  strftime(date_buffer, sizeof("XX/XX/XXXX"), "%m/%d/%Y", t);
   text_layer_set_text(date_layer, date_buffer);
 }
 
@@ -149,22 +149,7 @@ static void set_time_anim()
     case 19:
       text_layer_set_text(prompt_label, "C:\\>cls");
 
-      prompt_visible = true;
-      timer = app_timer_register(PROMPT_DELTA, set_time_anim, 0);
-      break;
-    default:  //Rest of the minute
-      //Do prompt flash
-      if(prompt_visible)
-      {
-        prompt_visible = false;
-        layer_remove_from_parent(inverter_layer_get_layer(prompt_layer));
-      }
-      else
-      {
-        prompt_visible = true;
-        layer_add_child(window_get_root_layer(window), inverter_layer_get_layer(prompt_layer));
-      }
-      timer = app_timer_register(PROMPT_DELTA, set_time_anim, 0);
+      timer = app_timer_register(TYPE_DELTA, set_time_anim, 0);
       break;
   }
 
@@ -226,6 +211,7 @@ static void window_load(Window *window)
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(prompt_label));
 
   prompt_layer = inverter_layer_create(GRect(45, 115, 12, 2));
+  
 }
 
 static void window_unload(Window *window) 
@@ -241,6 +227,7 @@ static void window_unload(Window *window)
   //Prompt
   text_layer_destroy(prompt_label);
   inverter_layer_destroy(prompt_layer);
+  
 }
 
 /******************************** App Lifecycle *********************************/
