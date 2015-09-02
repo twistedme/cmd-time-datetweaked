@@ -35,7 +35,7 @@ static void set_time(struct tm *t)
   text_layer_set_text(time_layer, time_buffer);
 
   //Set date
-  strftime(date_buffer, sizeof("XX/XX/XXXX"), "%d/%m/%Y", t);
+  strftime(date_buffer, sizeof("XX/XX/XXXX"), "%m/%d/%Y", t);
   text_layer_set_text(date_layer, date_buffer);
 }
 
