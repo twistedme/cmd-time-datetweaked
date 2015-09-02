@@ -133,6 +133,21 @@ static void set_time_anim()
       text_layer_set_text(date_label, "C:\\>date /t");
       layer_add_child(window_get_root_layer(window), text_layer_get_layer(date_layer));
       text_layer_set_text(prompt_label, "C:\\>");
+    
+      timer = app_timer_register(18 * TYPE_DELTA, set_time_anim, 0);
+      break;
+    case 17:
+      text_layer_set_text(prompt_label, "C:\\>c");
+
+      timer = app_timer_register(TYPE_DELTA, set_time_anim, 0);
+      break;
+    case 18:
+      text_layer_set_text(prompt_label, "C:\\>cl");
+
+      timer = app_timer_register(TYPE_DELTA, set_time_anim, 0);
+      break;
+    case 19:
+      text_layer_set_text(prompt_label, "C:\\>cls");
 
       prompt_visible = true;
       timer = app_timer_register(PROMPT_DELTA, set_time_anim, 0);
